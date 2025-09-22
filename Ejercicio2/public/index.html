@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Sueldo con Comisiones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-info d-flex justify-content-center align-items-center vh-100">
+
+  <div class="card shadow-lg p-4" style="width: 28rem; border-radius: 20px;">
+    <h2 class="text-center mb-3">Calcular Sueldo</h2>
+    <form id="formSueldo">
+      <div class="mb-3">
+        <label for="sueldo" class="form-label">Sueldo base</label>
+        <input type="number" step="0.01" class="form-control" id="sueldo" name="sueldo" required>
+      </div>
+      <div class="mb-3">
+        <label for="venta1" class="form-label">Venta 1</label>
+        <input type="number" step="0.01" class="form-control" id="venta1" name="venta1" required>
+      </div>
+      <div class="mb-3">
+        <label for="venta2" class="form-label">Venta 2</label>
+        <input type="number" step="0.01" class="form-control" id="venta2" name="venta2" required>
+      </div>
+      <div class="mb-3">
+        <label for="venta3" class="form-label">Venta 3</label>
+        <input type="number" step="0.01" class="form-control" id="venta3" name="venta3" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Calcular</button>
+    </form>
+
+    <div id="resultado" class="mt-4 text-center"></div>
+  </div>
+
+  <script>
+    document.getElementById("formSueldo").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let sueldo = parseFloat(document.getElementById("sueldo").value);
+      let venta1 = parseFloat(document.getElementById("venta1").value);
+      let venta2 = parseFloat(document.getElementById("venta2").value);
+      let venta3 = parseFloat(document.getElementById("venta3").value);
+
+      let comisiones = (venta1 + venta2 + venta3) * 0.10;
+      let total = sueldo + comisiones;
+
+      document.getElementById("resultado").innerHTML = `
+        <h4>Resultados</h4>
+        <p>Comisiones: <strong>$${comisiones.toFixed(2)}</strong></p>
+        <p>Total a recibir en el mes: <strong>$${total.toFixed(2)}</strong></p>
+        <a href="/" class="btn btn-link">Volver a intentar</a>
+      `;
+    });
+  </script>
+
+</body>
+</html>

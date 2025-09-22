@@ -1,0 +1,14 @@
+{
+  "name": "ejercicio2",
+  "version": "1.0.0",
+  "description": "en20mins",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "yomerolas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

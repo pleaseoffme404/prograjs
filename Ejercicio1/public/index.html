@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../assets/css/style.css" rel="stylesheet">
+        
+    </head>
+    <body><center>    <div class="calc">
+        <div class="calctext">
+            <span><h1>Calculadora de Ganancias sobre Inversiones</h1></span>
+    <hr>
+    <span>Ingrese la cantidad de capital que desea invertir.</span>
+    <form action="/calcular" method="POST" class="formss">
+      <input class="depos" type="text" id="input" name="depos" placeholder="Monto de inversión" required><br>
+      <input class="depos" type="number" id="meses" name="meses" placeholder="Cantidad de meses" required><br>
+    <input class="submit" type="submit" value="Calcular Ganancias"><br>
+       
+        <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+
+
+        
+    </form>
+    <span class="small">Ganancia del 2% mensual sobre inversiones</span>
+        </div>
+    </div>
+    </center>
+    </body>
+    <script src="assets/js/script.js"></script>
+</html>
