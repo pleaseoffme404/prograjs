@@ -1,0 +1,59 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+html{
+background-color: rgb(105, 202, 202);
+margin: 0;
+padding: 0;
+align-content: center;
+
+}
+
+.calc{
+    border-radius: 20px;
+    background-color: rgb(179, 179, 179);
+    align-content: center;
+    height: 50%;
+  margin-top: 4%;
+    text-align: center;
+width: 40%;
+}
+.formss .depos{
+background-color: white;
+border-radius: 20px;
+border-color: white;
+padding: 3px;
+margin: 3px;
+font-size: 20px;
+}
+.formss .submit {
+    border-color: white;
+    align-content: center;
+    text-align: center;
+    background-color: black;
+    border: none;
+    color: white;
+    border-radius: 20px;
+    padding: 5px;
+    font-size: 20px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  .formss .submit:hover {
+    background-color: rgb(228, 195, 10);
+    box-shadow: 2px 2px 10px rgb(255, 208, 0);
+    border-color: white;
+    border: 1px solid white;
+    color: black;
+    transform: scale(1.1); 
+  }
+
+.calctext{
+    font-family: "Raleway", sans-serif;
+font-optical-sizing: auto;
+overflow-y: hidden;
+padding: 15px;
+}
+.small{
+    font-size: 12px;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Calificación Final</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <center>
+        <div class="calc">
+            <div class="calctext">
+                <h1>Calificación Final de Algoritmos</h1>
+                <hr>
+                <span>Ingresa tus calificaciones</span><br>
+                <span class="small">En términos de 100</span>
+
+                <form class="formss" id="gradeForm">
+                    <input class="depos" type="number" step="0.1" id="p1_cal" placeholder="Calificación Parcial 1" required><br>
+                    <input class="depos" type="number" step="0.1" id="p2_cal" placeholder="Calificación Parcial 2" required><br>
+                    <input class="depos" type="number" step="0.1" id="p3_cal" placeholder="Calificación Parcial 3" required><br>
+                    
+                    <input class="depos" type="number" step="0.1" id="examFin" placeholder="Calificación Examen Final" required><br>
+                    <input class="depos" type="number" step="0.1" id="workFin" placeholder="Calificación Trabajo Final" required><br><br>
+
+                    <input class="submit" type="submit" value="Calcular Calificación">
+                    
+                    <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+                </form>
+                <span class="small">55% Parciales, 30% Examen, 15% Trabajo</span>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        const elForm = document.getElementById('gradeForm');
+        const divRes = document.getElementById('result');
+
+        elForm.addEventListener('submit', function(evt) {
+            evt.preventDefault();
+
+            const p1 = parseFloat(document.getElementById('p1_cal').value);
+            const p2 = parseFloat(document.getElementById('p2_cal').value);
+            const p3 = parseFloat(document.getElementById('p3_cal').value);
+            const examVal = parseFloat(document.getElementById('examFin').value);
+            const workVal = parseFloat(document.getElementById('workFin').value);
+
+            if (isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(examVal) || isNaN(workVal)) {
+                divRes.innerHTML = "Error: Ingresa todas las calificaciones.";
+                divRes.style.color = 'red';
+                return;
+            }
+
+            const avgParcial = (p1 + p2 + p3) / 3;
+
+            const valParciales = avgParcial * 0.55;
+            const valExam = examVal * 0.30;
+            const valWork = workVal * 0.15;
+
+            const notaFinal = valParciales + valExam + valWork;
+            
+            divRes.style.color = 'black';
+            divRes.innerHTML = `
+                <p>Promedio de parciales: <strong>${avgParcial.toFixed(2)}</strong></p>
+                <p>Tu calificación final en Algoritmos es:</p>
+                <h2>${notaFinal.toFixed(2)}</h2>
+            `;
+        });
+    </script>
+
+</body>
+</html>

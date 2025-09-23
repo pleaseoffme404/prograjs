@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Calculadora de descuentos lokotes</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+    <meta charset="UTF-8">
+    <title>Calculadora de Descuentos</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-info d-flex justify-content-center align-items-center vh-100">
+<body>
 
-  
-<center>
-<div class="calc">
- <div class="calctext">
-            <span><h1>Calculadora de descuentos de compras??????</h1></span>
-    <hr>
-    <span>Ingrese la cantidad de la compra</span><br>
-    <form action="/calcular" method="POST" class="formss">
-      <input class="depos" type="text" id="input" name="depos" placeholder="Cantidad total de la compra" required><br><br>
-    <input class="submit" type="submit" value="Calcular Descuento">
-       
-        <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+    <center>
+        <div class="calc">
+            <div class="calctext">
+                <h1>Calculadora de Descuentos</h1>
+                <hr>
+                <span>Ingrese la cantidad total de la compra</span><br>
 
-
-        
-    </form>
-    <span class="small">Ganancia del 2% mensual sobre inversiones</span>
+                <form class="formss" id="discountForm">
+                    <input class="depos" type="number" id="compraTotal" placeholder="Monto total de la compra" required><br><br>
+                    <input class="submit" type="submit" value="Calcular Descuento">
+                    
+                    <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+                </form>
+                <span class="small">Descuento fijo del 15% sobre el total.</span>
+            </div>
         </div>
-    </div>
     </center>
+
+    <script>
+        const form = document.getElementById('discountForm');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const totalCompra = parseFloat(document.getElementById('compraTotal').value);
+
+            if (isNaN(totalCompra) || totalCompra <= 0) {
+                resultDiv.innerHTML = "Por favor, ingrese un monto válido.";
+                resultDiv.style.color = 'red';
+                return; 
+            }
+
+            const descuento = 0.15;
+            const descuentoEnDinero = totalCompra * descuento;
+            const totalConDescuento = totalCompra - descuentoEnDinero;
+            
+            resultDiv.style.color = 'black'; 
+            resultDiv.innerHTML = `
+                <p>Tu descuento del 15% es de: <strong>$${descuentoEnDinero.toFixed(2)}</strong></p>
+                <p>Total a pagar: <strong>$${totalConDescuento.toFixed(2)}</strong></p>
+            `;
+        });
+    </script>
 
 </body>
 </html>

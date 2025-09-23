@@ -1,11 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora de Edad</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+
+    <center>
+        <div class="calc">
+            <div class="calctext">
+                <h1>Calculadora de Edad</h1>
+                <hr>
+                <span>Ingresa tu fecha de nacimiento</span><br>
+
+                <form class="formss" id="ageForm">
+                    <input class="depos" type="date" id="fecha_nac_inp" required><br><br>
+
+                    <input class="submit" type="submit" value="Calcular mi Edad">
+                    
+                    <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+                </form>
+                <span class="small">El cálculo se basa en la fecha actual.</span>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        const frmEdad = document.getElementById('ageForm');
+        const resContainer = document.getElementById('result');
+
+        frmEdad.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const bDay_val = document.getElementById('fecha_nac_inp').value;
+
+            if (!bDay_val) {
+                resContainer.innerHTML = "Por favor, selecciona tu fecha de nacimiento.";
+                resContainer.style.color = 'red';
+                return;
+            }
+
+            const todayDate = new Date();
+            const nacDate = new Date(bDay_val);
+
+            if (nacDate > todayDate) {
+                resContainer.innerHTML = "No puedes haber nacido en el futuro.";
+                resContainer.style.color = 'red';
+                return;
+            }
+            
+            let age_final = todayDate.getFullYear() - nacDate.getFullYear();
+            
+            const monthDiff = todayDate.getMonth() - nacDate.getMonth();
+            const dayDiff = todayDate.getDate() - nacDate.getDate();
+
+            if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                age_final--; 
+            }
+            
+            resContainer.style.color = 'black';
+            resContainer.innerHTML = `
+                <h2>Tienes ${age_final} años.</h2>
+            `;
+        });
+    </script>
+
 </body>
 </html>

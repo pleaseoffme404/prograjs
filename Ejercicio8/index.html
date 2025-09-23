@@ -1,11 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora de Utilidades</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+
+    <center>
+        <div class="calc">
+            <div class="calctext">
+                <h1>Calculo de Utilidades Anuales</h1>
+                <hr>
+                <span>Ingresa los datos del travajador</span><br>
+
+                <form class="formss" id="utilidadForm">
+                    <input class="depos" type="number" step="0.01" id="sal_mensual_inp" placeholder="Salario mensual ($)" required><br>
+                    <input class="depos" type="number" id="antig_yrs_inp" placeholder="Años de antigüedad" required><br><br>
+
+                    <input class="submit" type="submit" value="Calcular Utilidad">
+                    
+                    <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+                </form>
+                <span class="small">El porcentaje depende de la antigüedad.</span>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        const elForm = document.getElementById('utilidadForm');
+        const resDiv = document.getElementById('result');
+
+        elForm.addEventListener('submit', function(evt) {
+            evt.preventDefault();
+
+            const sal_mensual = parseFloat(document.getElementById('sal_mensual_inp').value);
+            const antig_yrs = parseInt(document.getElementById('antig_yrs_inp').value);
+
+            if (isNaN(sal_mensual) || isNaN(antig_yrs) || sal_mensual <= 0 || antig_yrs < 0) {
+                resDiv.innerHTML = "Porfavor, ingresa datos válidos.";
+                resDiv.style.color = 'red';
+                return;
+            }
+
+            let util_percent = 0;
+
+            if (antig_yrs < 1) {
+                util_percent = 0.05; 
+            } else if (antig_yrs >= 1 && antig_yrs < 2) {
+                util_percent = 0.07; 
+            } else if (antig_yrs >= 2 && antig_yrs < 5) {
+                util_percent = 0.10; 
+            } else if (antig_yrs >= 5 && antig_yrs < 10) {
+                util_percent = 0.15; 
+            } else { 
+                util_percent = 0.20; 
+            }
+
+            const util_final = sal_mensual * util_percent;
+            
+            resDiv.style.color = 'black';
+            resDiv.innerHTML = `
+                <p>Antigüedad: <strong>${antig_yrs} años</strong></p>
+                <p>El porcentaje de utilidad es: <strong>${(util_percent * 100).toFixed(2)}%</strong></p>                <hr>
+                <h3>La utilidad que recibira es:</h3>
+                <h2>$${util_final.toFixed(2)}</h2>
+            `;
+        });
+    </script>
+
 </body>
 </html>

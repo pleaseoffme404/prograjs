@@ -1,11 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Palabras a Números</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+
+    <center>
+        <div class="calc">
+            <div class="calctext">
+                <h1>Traductor de Palabras a Números</h1>
+                <hr>
+                <span>Escribe palabras (cero, uno, dos...) separadas por comas</span><br>
+
+                <form class="formss" id="wordForm">
+                    <input class="depos" type="text" id="word_input" placeholder="Ej: uno, perro, tres, nueve" required style="width: 80%;"><br><br>
+
+                    <input class="submit" type="submit" value="Traducir a Números">
+                    
+                    <div id="result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+                </form>
+                <span class="small">Las palabras no numéricas se convierten en -1.</span>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        function palabrasANumeros(arr_words) {
+            const word_to_num_dicc = {
+                "cero": 0,
+                "uno": 1,
+                "dos": 2,
+                "tres": 3,
+                "cuatro": 4,
+                "cinco": 5,
+                "seis": 6,
+                "siete": 7,
+                "ocho": 8,
+                "nueve": 9
+            };
+
+            const arr_res = [];
+            for (let pal of arr_words) {
+                const clean_pal = pal.toLowerCase();
+                
+                if (word_to_num_dicc.hasOwnProperty(clean_pal)) {
+                    arr_res.push(word_to_num_dicc[clean_pal]);
+                } else {
+                    arr_res.push(-1);
+                }
+            }
+            return arr_res;
+        }
+
+        const elForm = document.getElementById('wordForm');
+        const resDiv = document.getElementById('result');
+
+        elForm.addEventListener('submit', function(evt) {
+            evt.preventDefault();
+
+            const inp_str = document.getElementById('word_input').value;
+            
+            if (!inp_str) {
+                resDiv.innerHTML = "Por favor, escribe algunas palabras.";
+                resDiv.style.color = 'red';
+                return;
+            }
+
+            const wordList = inp_str.split(',').map(word => word.trim());
+
+            const num_arr = palabrasANumeros(wordList);
+            
+            resDiv.style.color = 'black';
+            resDiv.innerHTML = `
+                <p>Arreglo resultante:</p>
+                <h2>${JSON.stringify(num_arr)}</h2>
+            `;
+        });
+    </script>
+
 </body>
 </html>

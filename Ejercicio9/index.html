@@ -1,11 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Validador de Formulario</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+    <center>
+        <div class="calc" style="width: 50%;">
+            <div class="calctext">
+                <h1>Formulario de Rejistro</h1>
+                <hr>
+                <span>Introduce tus datos y se validarán al cambiar de campo.</span><br>
+
+                <form class="formss" id="reg_form" novalidate>
+                    <input class="depos" type="text" id="user_inp" placeholder="Nombre de usuario" required><br>
+                    <input class="depos" type="email" id="email_inp" placeholder="Correo electrónico" required><br>
+                    <input class="depos" type="password" id="pass_one_inp" placeholder="Contraseña (mín. 8 caracteres)" required><br>
+                    <input class="depos" type="password" id="pass_two_inp" placeholder="Confirmar contraseña" required><br>
+                    <input class="depos" type="text" id="dni_inp" placeholder="DNI (ej: 12345678A)" required><br><br>
+                    
+                    <input class="submit" type="submit" value="Registrar">
+                </form>
+            </div>
+        </div>
+    </center>
+
+    <script>
+        const userInput = document.getElementById('user_inp');
+        const emailInput = document.getElementById('email_inp');
+        const pass1Input = document.getElementById('pass_one_inp');
+        const pass2Input = document.getElementById('pass_two_inp');
+        const dniInput = document.getElementById('dni_inp');
+
+        function vlidaDNI(dniStr) {
+            const dniRegex = /^\d{8}[a-zA-Z]$/;
+            if (!dniRegex.test(dniStr)) return false;
+
+            const num = parseInt(dniStr.substring(0, 8), 10);
+            const userLetter = dniStr.substring(8).toUpperCase();
+            const letters = "TRWAGMYFPDXBNJZSQVHLCKE";
+            const correctLetter = letters[num % 23];
+
+            return userLetter === correctLetter;
+        }
+
+        userInput.addEventListener('blur', function() {
+            if (this.value.trim() === '') {
+                alert('El nombre de usaurio es requrido.');
+            }
+        });
+
+        emailInput.addEventListener('blur', function() {
+            const emailRegex = /^\S+@\S+\.\S+$/;
+            if (!emailRegex.test(this.value)) {
+                alert('El formato del correo es incorecto.');
+            }
+        });
+
+        pass1Input.addEventListener('blur', function() {
+            if (this.value.length < 8) {
+                alert('La contraseña debe tener almenos 8 caracteres.');
+            }
+        });
+
+        pass2Input.addEventListener('blur', function() {
+            if (this.value !== pass1Input.value) {
+                alert('Las contraseñas no coinciden.');
+            }
+        });
+
+        dniInput.addEventListener('blur', function() {
+            if (!vlidaDNI(this.value)) {
+                alert('El DNI introducido no es vlido.');
+            }
+        });
+
+        document.getElementById('reg_form').addEventListener('submit', function(evt) {
+            evt.preventDefault();
+            alert('Validación completa! (El formulario no se enviará, duh)');
+        });
+
+    </script>
 </body>
 </html>
