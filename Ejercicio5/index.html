@@ -34,6 +34,7 @@
             e.preventDefault();
 
             const bDay_val = document.getElementById('fecha_nac_inp').value;
+            const MAX_AGE = 120;
 
             if (!bDay_val) {
                 resContainer.innerHTML = "Por favor, selecciona tu fecha de nacimiento.";
@@ -58,6 +59,11 @@
             if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
                 age_final--; 
             }
+            if (age_final > MAX_AGE) {
+                resContainer.innerHTML = `La edad máxima permitida es de ${MAX_AGE} años.`;
+                resContainer.style.color = 'red';
+                return;
+            }
             
             resContainer.style.color = 'black';
             resContainer.innerHTML = `

@@ -44,7 +44,11 @@
             const p3 = parseFloat(document.getElementById('p3_cal').value);
             const examVal = parseFloat(document.getElementById('examFin').value);
             const workVal = parseFloat(document.getElementById('workFin').value);
-
+            if (p1 > 100 || p2 > 100 || p3 > 100 || examVal > 100 || workVal > 100){
+             divRes.innerHTML = "Error: Las calificaciones no pueden ser mayores a 100.";
+              divRes.style.color = 'red';
+              return;
+}
             if (isNaN(p1) || isNaN(p2) || isNaN(p3) || isNaN(examVal) || isNaN(workVal)) {
                 divRes.innerHTML = "Error: Ingresa todas las calificaciones.";
                 divRes.style.color = 'red';

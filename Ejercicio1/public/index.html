@@ -28,13 +28,10 @@
     </center>
 
     <script>
-        // ✅ PASO 2: Este ID debe coincidir exactamente con el del formulario de arriba.
         const form = document.getElementById('investmentForm');
         const resultDiv = document.getElementById('result');
 
-        // Se agrega el 'listener' al formulario que SÍ encontramos.
         form.addEventListener('submit', function(event) {
-            // Esta línea ahora SÍ se ejecutará y evitará la recarga.
             event.preventDefault();
 
             const capital = parseFloat(document.getElementById('capital').value);
